@@ -120,7 +120,7 @@ Two containers (alpha and beta) running simultaneously under one supervisor proc
 ### Screenshot 2 — Metadata Tracking
 Output of the `ps` command showing all tracked container metadata.
 
-![Screenshot 2](screenshots/screenshot1.png)
+![Screenshot 2](screenshots/screenshot2.png)
 
 > The ps table shows CONTAINER, PID, STATE, and STARTED timestamp for each container.
 
@@ -129,7 +129,7 @@ Output of the `ps` command showing all tracked container metadata.
 ### Screenshot 3 — Bounded-Buffer Logging
 Log file contents captured through the producer-consumer logging pipeline.
 
-![Screenshot 3](screenshots/screenshot2.png)
+![Screenshot 3](screenshots/screenshot3.png)
 
 > gamma started, output "hello from gamma" captured via pipe → bounded buffer → log file → retrieved with `logs gamma`.
 
@@ -138,7 +138,7 @@ Log file contents captured through the producer-consumer logging pipeline.
 ### Screenshot 4 — CLI and IPC
 A CLI stop command issued and the supervisor responding, showing the UNIX socket IPC channel.
 
-![Screenshot 4](screenshots/screenshot3.png)
+![Screenshot 4](screenshots/screenshot4.png)
 
 > `stop alpha` sent over UNIX domain socket, supervisor responds with SIGTERM confirmation, ps shows alpha=stopped, beta=running, gamma=exited.
 
@@ -147,7 +147,7 @@ A CLI stop command issued and the supervisor responding, showing the UNIX socket
 ### Screenshot 5 — Soft-Limit Warning
 dmesg output showing the kernel module emitting a soft-limit warning.
 
-![Screenshot 5](screenshots/screenshot4.png)
+![Screenshot 5](screenshots/screenshot5and6.png)
 
 > `[container_monitor] SOFT LIMIT container=hog pid=4460 rss=9043968 limit=5242880` — RSS exceeded 5 MiB soft limit.
 
@@ -156,7 +156,7 @@ dmesg output showing the kernel module emitting a soft-limit warning.
 ### Screenshot 6 — Hard-Limit Enforcement
 dmesg showing the container killed after exceeding the hard limit, and ps reflecting the kill.
 
-![Screenshot 6](screenshots/screenshot4.png)
+![Screenshot 6](screenshots/screenshot5and6.png)
 
 > `[container_monitor] HARD LIMIT container=hog pid=4460 rss=17424384 limit=10485760` — process killed. ps shows hog=killed.
 
@@ -165,7 +165,7 @@ dmesg showing the container killed after exceeding the hard limit, and ps reflec
 ### Screenshot 7 — Scheduling Experiment
 Two CPU-bound containers with different nice values showing measurable time difference.
 
-![Screenshot 7](screenshots/screenshot5.png)
+![Screenshot 7](screenshots/screenshot7.png)
 
 > fast (nice=-5): 9.710s — slow (nice=10): 19.704s. Higher priority container finished in roughly half the time.
 
@@ -174,7 +174,7 @@ Two CPU-bound containers with different nice values showing measurable time diff
 ### Screenshot 8 — Clean Teardown
 No zombie processes after shutdown, supervisor exits cleanly, module unloads.
 
-![Screenshot 8](screenshots/screenshot6.png)
+![Screenshot 8](screenshots/screenshot8.png)
 
 > `ps aux | grep defunct` returns nothing. Supervisor prints "shutting down...". dmesg confirms "Module unloaded."
 
